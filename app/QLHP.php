@@ -33,6 +33,16 @@ $sql = "SELECT HocPhan.MaHP, HocPhan.TenHP, HocPhan.SoTinChi
         JOIN DangKy ON ChiTietDangKy.MaDK = DangKy.MaDK
         WHERE DangKy.MaSV = '$MaSV'";
 $result = $conn->query($sql);
+
+// Tính tổng số học phần và tổng số tín chỉ
+$totalCourses = $result->num_rows;
+$totalCredits = 0;
+while ($row = $result->fetch_assoc()) {
+    $totalCredits += $row['SoTinChi'];
+}
+
+// Chạy lại query để hiển thị danh sách học phần
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +107,6 @@ $result = $conn->query($sql);
         .logout-btn:hover {
             background: darkred;
         }
-
         .home-btn {
             position: absolute;
             top: 10px;
@@ -115,11 +124,15 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-
 <a href="layoutmain.php" class="home-btn">Trang chủ</a>
 <a href="logout.php" class="logout-btn">Đăng xuất</a>
 
 <h2>Danh Sách Học Phần Đã Đăng Ký</h2>
+
+<!-- Hiển thị tổng số học phần và tổng số tín chỉ -->
+<p><strong>Tổng số học phần đã đăng ký:</strong> <?php echo $totalCourses; ?></p>
+<p><strong>Tổng số tín chỉ:</strong> <?php echo $totalCredits; ?></p>
+
 <table>
     <tr>
         <th>Mã HP</th>
