@@ -74,10 +74,25 @@ include 'config/database.php';
         .add-btn:hover {
             background: #0056b3;
         }
+        .home-btn {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .home-btn:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 
 <body>
+    <a href="layoutmain.php" class="home-btn">Trang chủ</a>
+
     <h2>Danh sách Sinh viên</h2>
     <table>
         <tr>
